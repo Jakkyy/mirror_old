@@ -1,0 +1,33 @@
+{
+    "master_server": "918974633435344937",
+    "guilds": [
+        {
+            "name": "HypeHunters",
+            "guild_id": "490903807648071690",
+            "categories": [{
+                "id": "882171466832044072",
+                "name": "NFT" 
+            }]
+        },
+        {
+            "name": "CryptoClub",
+            "guild_id": "833430744802000978",
+            "categories": [{
+                "id": "895378141063811092",
+                "name": "NFT INFO" 
+            },{
+                "id": "838112076794036264",
+                "name": "NFT PLAYS"
+            }]  
+        },
+        {
+            "name": "TestServer",
+            "guild_id": "919634483861401631",
+            "categories": [{
+                "id": "919634484301815848",
+                "name": "MIRRORED" 
+            }]
+        }
+    ]
+        
+}

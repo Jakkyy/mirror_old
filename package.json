@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "discord.js": "^11.6.4",
+    "node-fetch": "^2.6.6",
+    "nodemon": "^2.0.15",
+    "puppeteer": "^13.0.0"
+  }
+}
