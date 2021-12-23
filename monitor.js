@@ -41,14 +41,13 @@ client.on("ready", async() => {
                 //OLD CHANNELS + LUNGO
                 //NEW CHANNELS + CORTO DOVE NON C'è CANALE ELIMINATO
                 console.log(old_channels.length, new_channels.length);
-
-                    
+                
                 //map of all the channels
                 old_channels.map((channel, i) => {
 
                     new_channels.map((channel2, i2) => {
 
-                        //check for each channel in old_channels if there's a same channel in new_channels
+                        //check for each channel in old_channels if there's the same channel in new_channels (checking by id)
                         if (channel[1].id == channel2[1].id) {
                             //removing from something array the duplicated channels
                             something.splice(i, 1);
