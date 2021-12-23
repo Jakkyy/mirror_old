@@ -8,7 +8,6 @@ const settings = JSON.parse(fs.readFileSync("settings.json", "utf8"));
 
 clientBot.on("ready", () => {
     console.log("Bot sbu ready");
-
     clientBot.user.setActivity("picchiare una tro.");
 
 })
@@ -18,10 +17,9 @@ client.on("ready", async() => {
     console.log(`${client.user.username} ready`);
 
     data = await fetchData();
-
     categories = data[1];
 
-    //first \ fetching (converting in array) all *TEXT* channels from *FOLDER_ID* in categories array
+    //first \ fetching (converting in array) all *TEXT* channels from *FOLDER_ID* in categories array (old_channels)
     old_channels = Array.from(client.channels.filter(channel => channel.type === "text" && categories.includes(channel.parentID)));
 
     setInterval(async() => {
@@ -44,34 +42,39 @@ client.on("ready", async() => {
                 //NEW CHANNELS + CORTO DOVE NON C'è CANALE ELIMINATO
                 console.log(old_channels.length, new_channels.length);
 
-
+                    
+                //map of all the channels
                 old_channels.map((channel, i) => {
 
                     new_channels.map((channel2, i2) => {
 
+                        //check for each channel in old_channels if there's a same channel in new_channels
                         if (channel[1].id == channel2[1].id) {
+                            //removing from something array the duplicated channels
                             something.splice(i, 1);
                         }
                     })
                 })
-
+                //in this way something contains only the channel to delete
                 something = something.at(-1)[1];
 
                 json = JSON.parse(await fs.readFileSync("webhooks.json", "utf8"));
-
+                
+                //fetching the json and searching for something row webhook and id
                 const req = await fetch(json[something.id]);
-
                 res = await req.json();
 
+                //get the channel to remove using res.channel.id
                 channel_to_remove = clientBot.channels.get(res.channel_id);
-
 
                 try {
                     channel_to_remove.delete();
                 } catch (err) {
+                    //if channel is already deleted or something else
                     return console.log("Impossibile eliminare il canale")
                 }
 
+                //assigning to old_channels the new array (new_channels
                 old_channels = new_channels;
                 return console.log("tolto canale ")
             }
@@ -90,7 +93,6 @@ client.on("ready", async() => {
     }, 500);
 })
 
-
 client.on("message", async(message) => {
 
     if (message.guild.id != "919634483861401631" || !message.guild.id) return;
@@ -98,7 +100,6 @@ client.on("message", async(message) => {
     //calling fetchData function and retreiving guild_id
     data = await fetchData();
     guild_id = data[0];
-
 
     if (guild_id.includes(message.guild.id)) {
         json = JSON.parse(await fs.readFileSync("webhooks.json", "utf8"));
